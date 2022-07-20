@@ -7,4 +7,14 @@ S /Users/parthbisen/code/rescript-play/node_modules/@rescript/react/lib/ocaml
 B /Users/parthbisen/code/rescript-play/node_modules/@rescript/react/lib/ocaml
 S src
 B lib/bs/src
+S src/components/Counter
+B lib/bs/src/components/Counter
+S src/components/History
+B lib/bs/src/components/History
+S src/components/Balance
+B lib/bs/src/components/Balance
+S src/components/types
+B lib/bs/src/components/types
+S src/components/Form
+B lib/bs/src/components/Form
 ####BSB GENERATED: NO EDIT}
