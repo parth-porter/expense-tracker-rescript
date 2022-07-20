@@ -3,12 +3,18 @@
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 
+import './History.component.css';
+;
+
 function $$History(Props) {
   var allTransactions = Props.allTransactions;
   return React.createElement("div", {
               className: "history-component"
             }, React.createElement("h3", undefined, "History Component"), Belt_Array.map(allTransactions, (function (transaction) {
-                    return React.createElement("li", undefined, transaction.description + " " + transaction.amount.toString() + " " + String(transaction.isPositive));
+                    var bgColor = transaction.isPositive ? "transaction-income" : "transaction-expense";
+                    return React.createElement("li", {
+                                className: bgColor
+                              }, transaction.description + " " + transaction.amount.toString() + " " + String(transaction.isPositive));
                   })), React.createElement("hr", undefined));
 }
 
@@ -18,4 +24,4 @@ export {
   make ,
   
 }
-/* react Not a pure module */
+/*  Not a pure module */
