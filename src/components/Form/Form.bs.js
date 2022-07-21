@@ -2,31 +2,25 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
-import * as Belt_Int from "rescript/lib/es6/belt_Int.js";
+import * as FormSubmit from "../../utils/FormSubmit.bs.js";
 
 import './form-component-styles.css';
 ;
+
+var initalInputs = {
+  input1: "",
+  input2: ""
+};
 
 function Form(Props) {
   var onSubmitHandler = Props.onSubmitHandler;
   var numberOfTransactions = Props.numberOfTransactions;
   var transactionNumberHandler = Props.transactionNumberHandler;
   var match = React.useState(function () {
-        return "";
+        return initalInputs;
       });
-  var setInput1 = match[1];
-  var input1 = match[0];
-  var match$1 = React.useState(function () {
-        return "";
-      });
-  var setInput2 = match$1[1];
-  var input2 = match$1[0];
-  var handleInput1 = function (e) {
-    return Curry._1(setInput1, e.target.value);
-  };
-  var handleInput2 = function (e) {
-    return Curry._1(setInput2, e.target.value);
-  };
+  var setFormInputs = match[1];
+  var formInputs = match[0];
   return React.createElement("div", {
               className: "form-component"
             }, React.createElement("h3", undefined, "Transaction Entry"), React.createElement("hr", undefined), React.createElement("div", {
@@ -34,36 +28,26 @@ function Form(Props) {
                 }), React.createElement("label", undefined, "Description"), React.createElement("br", undefined), React.createElement("input", {
                   className: "form-input1",
                   type: "text",
-                  value: input1,
-                  onChange: handleInput1
+                  value: formInputs.input1,
+                  onChange: (function ($$event) {
+                      return FormSubmit.inputEventHandler($$event, /* Input1 */0, setFormInputs);
+                    })
                 }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("label", undefined, "Amount"), React.createElement("br", undefined), React.createElement("input", {
                   className: "form-input2",
                   type: "number",
-                  value: input2,
-                  onChange: handleInput2
+                  value: formInputs.input2,
+                  onChange: (function ($$event) {
+                      return FormSubmit.inputEventHandler($$event, /* Input2 */1, setFormInputs);
+                    })
                 }), React.createElement("br", undefined), React.createElement("button", {
                   className: "button-submit",
                   onClick: (function (param) {
-                      var amountTemp = Belt_Int.fromString(input2);
-                      var amountFloat = amountTemp !== undefined ? amountTemp : 0;
-                      var objectCreated_isPositive = amountFloat > 0;
-                      var objectCreated = {
-                        id: numberOfTransactions,
-                        description: input1,
-                        amount: amountFloat,
-                        isPositive: objectCreated_isPositive
-                      };
-                      Curry._1(onSubmitHandler, (function (prev) {
-                              return prev.concat([objectCreated]);
-                            }));
-                      Curry._1(setInput1, (function (param) {
-                              return "";
-                            }));
-                      Curry._1(setInput2, (function (param) {
-                              return "";
-                            }));
-                      return Curry._1(transactionNumberHandler, (function (prev) {
-                                    return prev + 1 | 0;
+                      FormSubmit.onSubmitClick(formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
+                      return Curry._1(setFormInputs, (function (param) {
+                                    return {
+                                            input1: "",
+                                            input2: ""
+                                          };
                                   }));
                     })
                 }, "Submit"));
@@ -72,6 +56,7 @@ function Form(Props) {
 var make = Form;
 
 export {
+  initalInputs ,
   make ,
   
 }

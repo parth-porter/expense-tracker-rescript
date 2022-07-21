@@ -30,7 +30,7 @@ body{
     .all-content{
         display: grid;
         grid-template-rows: auto 1fr auto;
-        height: 93vh;
+        height: 88vh;
     }
     
 
@@ -42,7 +42,7 @@ body{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-template-rows: 1fr 2fr;
-        height: 93vh;
+        height: 88vh;
     }
     
     .history-component{
@@ -52,6 +52,11 @@ body{
         grid-row-end: 3;
     }
 
+}
+
+.footer{
+    font-weight: bold;
+    text-align: center;
 }
 
 

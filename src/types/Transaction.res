@@ -1,6 +1,6 @@
 type t = {
   id: int,
   description: string,
-  amount: int,
+  amount: float,
   isPositive: bool,
 }

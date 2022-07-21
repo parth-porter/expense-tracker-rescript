@@ -10,8 +10,6 @@ input[type=number]::-webkit-outer-spin-button {
     .form-component{
         padding-left: 10px;
         padding-right: 10px;
-
-        /* grid-area: formComponent; */
       }
   
 }
@@ -20,7 +18,6 @@ input[type=number]::-webkit-outer-spin-button {
     .form-component{
         padding-left: 10px;
         padding-right: 10px;
-        /* grid-area: formComponent; */
       }
 
 

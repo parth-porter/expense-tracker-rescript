@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
+import * as TypeConversions from "../../utils/TypeConversions.bs.js";
 
 import './History.component.css';
 ;
@@ -25,7 +26,7 @@ function $$History(Props) {
                                             className: "history-item-description"
                                           }, transaction.description), React.createElement("p", {
                                             className: "history-item-amount"
-                                          }, String(transaction.amount)), React.createElement("div", {
+                                          }, TypeConversions.float_to_RString(transaction.amount)), React.createElement("div", {
                                             className: "history-item-end-strip " + bgColor
                                           }, React.createElement("button", {
                                                 className: "history-item-button",

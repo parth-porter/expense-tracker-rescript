@@ -1,50 +1,24 @@
 %%raw(`import './App.css';`)
-
-@scope("JSON") @val external parseIntoMyData: string => array<Transaction.t> = "parse"
+@scope("JSON") @val external parseIntoArray: string => array<Transaction.t> = "parse"
 @scope("JSON") @val external parseIntoInt: string => int = "parse"
 
-let localTransactionValueOption = Dom_storage2.getItem(Dom_storage2.localStorage,"transactions-local")
-let localTransactionValue = switch localTransactionValueOption{
-  | Some(n) => n
-  | None => ""
-}
+let localDataTransactions = LocalStorage.getDataFromLocal("transactions-local")
+let initialStateTransactions = localDataTransactions != "" ? parseIntoArray(localDataTransactions) : []
 
-let initialStateTransactions: array<Transaction.t> = localTransactionValue !== "" ? parseIntoMyData(localTransactionValue) : []
-
-let localTransactionNumberOption = Dom_storage2.getItem(Dom_storage2.localStorage,"transactions-number-local")
-let localTransactionNumber = switch localTransactionNumberOption{
-  | Some(n) => n
-  | None => ""
-}
-
-let initialStateNumber: int = localTransactionValue !== "" ? parseIntoInt(localTransactionNumber) : 0
+let localTxnNumber = LocalStorage.getDataFromLocal("transactions-number-local")
+let initalTxnNumber = localTxnNumber != "" ? parseIntoInt(localTxnNumber) : 0
 
 @react.component
 let make = () => {
   let (transactions, setTransactions) = React.useState(_ => initialStateTransactions)
-  let (numberOfTransactions, setNumberOfTransactions) = React.useState(_ => initialStateNumber)
+  let (numberOfTransactions, setNumberOfTransactions) = React.useState(_ => initalTxnNumber)
 
-  React.useEffect1(() => {
-    let transactionStringOption = Js.Json.stringifyAny(transactions)
-    let transactionString = switch transactionStringOption {
-    | Some(n) => n
-    | None => ""
-    }
-    Dom_storage2.setItem(Dom_storage2.localStorage, "transactions-local", transactionString)
+
+  React.useEffect2(() => {
+    LocalStorage.setDataToLocal("transactions-local", Js.Json.stringifyAny(transactions))
+    LocalStorage.setDataToLocal("transactions-number-local", Js.Json.stringifyAny(transactions))
     None
-  }, [transactions])
-
-React.useEffect1(() => {
-    let transactionNumberOption = Js.Json.stringifyAny(numberOfTransactions)
-    let transactionNumber = switch transactionNumberOption {
-    | Some(n) => n
-    | None => ""
-    }
-    Dom_storage2.setItem(Dom_storage2.localStorage, "transactions-number-local", transactionNumber)
-    None
-  }, [numberOfTransactions])
-
-
+  }, (numberOfTransactions, transactions))
 
 
   <div className="App">
@@ -59,6 +33,9 @@ React.useEffect1(() => {
         numberOfTransactions={numberOfTransactions}
         transactionNumberHandler={setNumberOfTransactions}
       />
+    </div>
+    <div className="footer">
+    <p>{"Made with <3 and ReScript" -> React.string}</p>
     </div>
   </div>
 }

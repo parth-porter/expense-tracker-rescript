@@ -4,22 +4,18 @@ import * as Form from "./components/Form/Form.bs.js";
 import * as React from "react";
 import * as Balance from "./components/Balance/Balance.bs.js";
 import * as $$History from "./components/History/History.bs.js";
-import * as Caml_option from "rescript/lib/es6/caml_option.js";
+import * as LocalStorage from "./utils/LocalStorage.bs.js";
 
 import './App.css';
 ;
 
-var localTransactionValueOption = localStorage.getItem("transactions-local");
+var localDataTransactions = LocalStorage.getDataFromLocal("transactions-local");
 
-var localTransactionValue = localTransactionValueOption !== null ? localTransactionValueOption : "";
+var initialStateTransactions = localDataTransactions !== "" ? JSON.parse(localDataTransactions) : [];
 
-var initialStateTransactions = localTransactionValue !== "" ? JSON.parse(localTransactionValue) : [];
+var localTxnNumber = LocalStorage.getDataFromLocal("transactions-number-local");
 
-var localTransactionNumberOption = localStorage.getItem("transactions-number-local");
-
-var localTransactionNumber = localTransactionNumberOption !== null ? localTransactionNumberOption : "";
-
-var initialStateNumber = localTransactionValue !== "" ? JSON.parse(localTransactionNumber) : 0;
+var initalTxnNumber = localTxnNumber !== "" ? JSON.parse(localTxnNumber) : 0;
 
 function App(Props) {
   var match = React.useState(function () {
@@ -27,21 +23,17 @@ function App(Props) {
       });
   var transactions = match[0];
   var match$1 = React.useState(function () {
-        return initialStateNumber;
+        return initalTxnNumber;
       });
   var numberOfTransactions = match$1[0];
   React.useEffect((function () {
-          var transactionStringOption = JSON.stringify(transactions);
-          var transactionString = transactionStringOption !== undefined ? transactionStringOption : "";
-          localStorage.setItem("transactions-local", transactionString);
+          LocalStorage.setDataToLocal("transactions-local", JSON.stringify(transactions));
+          LocalStorage.setDataToLocal("transactions-number-local", JSON.stringify(transactions));
           
-        }), [transactions]);
-  React.useEffect((function () {
-          var transactionNumberOption = JSON.stringify(numberOfTransactions);
-          var transactionNumber = transactionNumberOption !== undefined ? transactionNumberOption : "";
-          localStorage.setItem("transactions-number-local", transactionNumber);
-          
-        }), [numberOfTransactions]);
+        }), [
+        numberOfTransactions,
+        transactions
+      ]);
   return React.createElement("div", {
               className: "App"
             }, React.createElement("div", {
@@ -56,22 +48,18 @@ function App(Props) {
                       onSubmitHandler: match[1],
                       numberOfTransactions: numberOfTransactions,
                       transactionNumberHandler: match$1[1]
-                    })));
+                    })), React.createElement("div", {
+                  className: "footer"
+                }, React.createElement("p", undefined, "Made with <3 and ReScript")));
 }
-
-var localTransactionValueOption$1 = localTransactionValueOption === null ? undefined : Caml_option.some(localTransactionValueOption);
-
-var localTransactionNumberOption$1 = localTransactionNumberOption === null ? undefined : Caml_option.some(localTransactionNumberOption);
 
 var make = App;
 
 export {
-  localTransactionValueOption$1 as localTransactionValueOption,
-  localTransactionValue ,
+  localDataTransactions ,
   initialStateTransactions ,
-  localTransactionNumberOption$1 as localTransactionNumberOption,
-  localTransactionNumber ,
-  initialStateNumber ,
+  localTxnNumber ,
+  initalTxnNumber ,
   make ,
   
 }
