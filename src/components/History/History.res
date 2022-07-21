@@ -7,13 +7,27 @@ let make = (~allTransactions: array<Transaction.t>) => {
   //         })
 
   <div className="history-component">
-    <h3> {"History Component"->React.string} </h3>
-    <ul>
+    <h3 className="history-title"> {"Transaction History"->React.string} </h3>
+    <hr/>
+    <div className="history-parent">
     {allTransactions->Belt.Array.map((transaction: Transaction.t) => {
-      let bgColor = transaction.isPositive ? "transaction-income" : "transaction-expense"
-      <li className={bgColor} key={(transaction.id)-> Belt.Int.toString}>{(transaction.description ++ " " ++Js.Int.toString(transaction.amount) ++ " " ++ Js.String.make(transaction.isPositive)) -> React.string}</li>
+      let bgColor = transaction.isPositive ? "history-item-positive" : "history-item-negative"
+      <div key={transaction.id->Belt.Int.toString} className="history-item">
+      <div className="history-item-text">
+        <p className="history-item-description">{transaction.description -> React.string}</p>
+        <p className="history-item-amount">{transaction.amount -> Belt.Int.toString -> React.string}</p>
+        <div className={`history-item-end-strip ${bgColor}`}>
+          <button id={transaction.id->Belt.Int.toString} className="history-item-button"></button>
+        </div>
+      </div>
+      
+      </div>
     })->React.array}
-    </ul>
+
+    </div>
+  
+    
+    
     <hr />
   </div>
 }

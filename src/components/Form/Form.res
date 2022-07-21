@@ -1,4 +1,4 @@
-
+%%raw(`import './form-component-styles.css';`)
 
 @react.component
 let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) => {
@@ -44,14 +44,16 @@ let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) 
 
 
     <div className="form-component">
-    <h3>{"Form Component" -> React.string}</h3>
+    <h3>{"Transaction Entry" -> React.string}</h3>
+    <hr></hr>
+    <div className="form-inputs">
+    </div>
         <label>{"Description" -> React.string}</label><br/>
-        <input type_="text" value={input1} onChange={handleInput1}/><br/>
+        <input className="form-input1" type_="text" value={input1} onChange={handleInput1}/><br/>
         <br/>
         <label>{"Amount" -> React.string}</label><br/>
-        <input type_ = "number"  value={input2} onChange={handleInput2}/>
+        <input className="form-input2" type_ = "number"  value={input2} onChange={handleInput2}/>
         <br/>
-        <button onClick={_ => onSubmitClick()} >{"Submit" -> React.string}</button>
-    <hr/>
+        <button onClick={_ => onSubmitClick()} className="button-submit">{"Submit" -> React.string}</button>
     </div>
 }

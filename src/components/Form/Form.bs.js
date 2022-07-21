@@ -4,6 +4,9 @@ import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
 import * as Belt_Int from "rescript/lib/es6/belt_Int.js";
 
+import './form-component-styles.css';
+;
+
 function Form(Props) {
   var onSubmitHandler = Props.onSubmitHandler;
   var numberOfTransactions = Props.numberOfTransactions;
@@ -26,15 +29,20 @@ function Form(Props) {
   };
   return React.createElement("div", {
               className: "form-component"
-            }, React.createElement("h3", undefined, "Form Component"), React.createElement("label", undefined, "Description"), React.createElement("br", undefined), React.createElement("input", {
+            }, React.createElement("h3", undefined, "Transaction Entry"), React.createElement("hr", undefined), React.createElement("div", {
+                  className: "form-inputs"
+                }), React.createElement("label", undefined, "Description"), React.createElement("br", undefined), React.createElement("input", {
+                  className: "form-input1",
                   type: "text",
                   value: input1,
                   onChange: handleInput1
                 }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("label", undefined, "Amount"), React.createElement("br", undefined), React.createElement("input", {
+                  className: "form-input2",
                   type: "number",
                   value: input2,
                   onChange: handleInput2
                 }), React.createElement("br", undefined), React.createElement("button", {
+                  className: "button-submit",
                   onClick: (function (param) {
                       var amountTemp = Belt_Int.fromString(input2);
                       var amountFloat = amountTemp !== undefined ? amountTemp : 0;
@@ -58,7 +66,7 @@ function Form(Props) {
                                     return prev + 1 | 0;
                                   }));
                     })
-                }, "Submit"), React.createElement("hr", undefined));
+                }, "Submit"));
 }
 
 var make = Form;
@@ -67,4 +75,4 @@ export {
   make ,
   
 }
-/* react Not a pure module */
+/*  Not a pure module */

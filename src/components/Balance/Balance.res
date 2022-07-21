@@ -1,3 +1,5 @@
+%%raw(`import './balance-component-styles.css';`)
+
 @react.component
 let make = (~allTransactions: array<Transaction.t>) => {
 
@@ -17,30 +19,28 @@ let make = (~allTransactions: array<Transaction.t>) => {
 
   let totalExpense = Belt.Array.reduce(allExpenses, 0, (acc, value) => acc - value)
 
+  <div className="balance-component">
+            <div className="balance-total">
+                <div className="balance-total-content">
+                <p>{"YOUR BALANCE" -> React.string}</p>
+                <h1 id="balance-amount-display">{(totalBalance)->Belt.Int.toString->React.string}</h1>
 
-  
+                </div>
+                
+            </div>
+            <div className="balance-combined">
+                <div className="balance-combined-inner-white">
+                <div className="balance-combined-income">
+                    <p>{"INCOME"->React.string}</p>
+                    <p className="income-amount">{(totalIncome)->Belt.Int.toString->React.string}</p>
+                </div>
+                <div className="balance-combined-expenses">
+                    <p>{"EXPENSES"-> React.string}</p>
+                    <p className="expense-amount">{(totalExpense)->Belt.Int.toString->React.string}</p>
+                </div>
 
-
-  
-
-
-    // Js.Array.forEach(allTransactions, (transaction:Transaction.t) => {
-    //     balanceObject.balanceAmount =  balanceObject.balanceAmount + transaction.amount;
-    //     if(transaction.isPositive){
-    //         balanceObject.incomeAmount =  balanceObject.incomeAmount + transaction.amount;
-    //     }
-    //     else{
-    //         balanceObject.expenseAmount =  balanceObject.expenseAmount - transaction.amount;
-    //     }
-    // })
-
-  <div>
-    <h3> {"Balance Component"->React.string} </h3>
-    <ul>
-      <li> {("Balance: " ++ Js.Int.toString(totalBalance))->React.string} </li>
-      <li> {("Income: " ++ Js.Int.toString(totalIncome))->React.string} </li>
-      <li> {("Expense: " ++ Js.Int.toString(totalExpense))->React.string} </li>
-    </ul>
-    <hr />
-  </div>
+                </div>
+                
+            </div>
+        </div>
 }

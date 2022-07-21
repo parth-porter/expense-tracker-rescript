@@ -10,12 +10,27 @@ function $$History(Props) {
   var allTransactions = Props.allTransactions;
   return React.createElement("div", {
               className: "history-component"
-            }, React.createElement("h3", undefined, "History Component"), React.createElement("ul", undefined, Belt_Array.map(allTransactions, (function (transaction) {
-                        var bgColor = transaction.isPositive ? "transaction-income" : "transaction-expense";
-                        return React.createElement("li", {
+            }, React.createElement("h3", {
+                  className: "history-title"
+                }, "Transaction History"), React.createElement("hr", undefined), React.createElement("div", {
+                  className: "history-parent"
+                }, Belt_Array.map(allTransactions, (function (transaction) {
+                        var bgColor = transaction.isPositive ? "history-item-positive" : "history-item-negative";
+                        return React.createElement("div", {
                                     key: String(transaction.id),
-                                    className: bgColor
-                                  }, transaction.description + " " + transaction.amount.toString() + " " + String(transaction.isPositive));
+                                    className: "history-item"
+                                  }, React.createElement("div", {
+                                        className: "history-item-text"
+                                      }, React.createElement("p", {
+                                            className: "history-item-description"
+                                          }, transaction.description), React.createElement("p", {
+                                            className: "history-item-amount"
+                                          }, String(transaction.amount)), React.createElement("div", {
+                                            className: "history-item-end-strip " + bgColor
+                                          }, React.createElement("button", {
+                                                className: "history-item-button",
+                                                id: String(transaction.id)
+                                              }))));
                       }))), React.createElement("hr", undefined));
 }
 

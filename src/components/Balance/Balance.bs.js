@@ -3,6 +3,9 @@
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
 
+import './balance-component-styles.css';
+;
+
 function Balance(Props) {
   var allTransactions = Props.allTransactions;
   var allAmount = allTransactions.map(function (x) {
@@ -31,7 +34,27 @@ function Balance(Props) {
   var totalExpense = Belt_Array.reduce(allExpenses, 0, (function (acc, value) {
           return acc - value | 0;
         }));
-  return React.createElement("div", undefined, React.createElement("h3", undefined, "Balance Component"), React.createElement("ul", undefined, React.createElement("li", undefined, "Balance: " + totalBalance.toString()), React.createElement("li", undefined, "Income: " + totalIncome.toString()), React.createElement("li", undefined, "Expense: " + totalExpense.toString())), React.createElement("hr", undefined));
+  return React.createElement("div", {
+              className: "balance-component"
+            }, React.createElement("div", {
+                  className: "balance-total"
+                }, React.createElement("div", {
+                      className: "balance-total-content"
+                    }, React.createElement("p", undefined, "YOUR BALANCE"), React.createElement("h1", {
+                          id: "balance-amount-display"
+                        }, String(totalBalance)))), React.createElement("div", {
+                  className: "balance-combined"
+                }, React.createElement("div", {
+                      className: "balance-combined-inner-white"
+                    }, React.createElement("div", {
+                          className: "balance-combined-income"
+                        }, React.createElement("p", undefined, "INCOME"), React.createElement("p", {
+                              className: "income-amount"
+                            }, String(totalIncome))), React.createElement("div", {
+                          className: "balance-combined-expenses"
+                        }, React.createElement("p", undefined, "EXPENSES"), React.createElement("p", {
+                              className: "expense-amount"
+                            }, String(totalExpense))))));
 }
 
 var make = Balance;
@@ -40,4 +63,4 @@ export {
   make ,
   
 }
-/* react Not a pure module */
+/*  Not a pure module */

@@ -1,0 +1,59 @@
+
+
+body{
+    height: 100vh;
+    margin: 0;
+    background-color: #eeeeee;
+}
+
+
+
+#root, .App{
+    height: 100vh;
+    background-color: #eeeeee;
+}
+
+
+.top-bar{
+    height: 7vh;
+    box-sizing: border-box;
+}
+
+.top-bar h1{
+    padding-top: 5px;
+    padding-left: 10px;
+    margin-top: 0;
+    border-bottom: 2px black solid;
+}
+
+@media sceen and (max-width: 750px){
+    .all-content{
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        height: 93vh;
+    }
+    
+
+}
+
+@media screen and (min-width: 751px){
+
+    .all-content{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 2fr;
+        height: 93vh;
+    }
+    
+    .history-component{
+        grid-column-start: 2;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+
+}
+
+
+
+

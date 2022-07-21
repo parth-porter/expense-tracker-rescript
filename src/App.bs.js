@@ -4,41 +4,74 @@ import * as Form from "./components/Form/Form.bs.js";
 import * as React from "react";
 import * as Balance from "./components/Balance/Balance.bs.js";
 import * as $$History from "./components/History/History.bs.js";
-import LogoSvg from "./logo.svg";
+import * as Caml_option from "rescript/lib/es6/caml_option.js";
 
 import './App.css';
 ;
 
-var logo = LogoSvg;
+var localTransactionValueOption = localStorage.getItem("transactions-local");
 
-var initialState = [];
+var localTransactionValue = localTransactionValueOption !== null ? localTransactionValueOption : "";
+
+var initialStateTransactions = localTransactionValue !== "" ? JSON.parse(localTransactionValue) : [];
+
+var localTransactionNumberOption = localStorage.getItem("transactions-number-local");
+
+var localTransactionNumber = localTransactionNumberOption !== null ? localTransactionNumberOption : "";
+
+var initialStateNumber = localTransactionValue !== "" ? JSON.parse(localTransactionNumber) : 0;
 
 function App(Props) {
   var match = React.useState(function () {
-        return initialState;
+        return initialStateTransactions;
       });
   var transactions = match[0];
   var match$1 = React.useState(function () {
-        return 0;
+        return initialStateNumber;
       });
+  var numberOfTransactions = match$1[0];
+  React.useEffect((function () {
+          var transactionStringOption = JSON.stringify(transactions);
+          var transactionString = transactionStringOption !== undefined ? transactionStringOption : "";
+          localStorage.setItem("transactions-local", transactionString);
+          
+        }), [transactions]);
+  React.useEffect((function () {
+          var transactionNumberOption = JSON.stringify(numberOfTransactions);
+          var transactionNumber = transactionNumberOption !== undefined ? transactionNumberOption : "";
+          localStorage.setItem("transactions-number-local", transactionNumber);
+          
+        }), [numberOfTransactions]);
   return React.createElement("div", {
               className: "App"
-            }, React.createElement("h1", undefined, "Expense Tracker"), React.createElement(Balance.make, {
-                  allTransactions: transactions
-                }), React.createElement($$History.make, {
-                  allTransactions: transactions
-                }), React.createElement(Form.make, {
-                  onSubmitHandler: match[1],
-                  numberOfTransactions: match$1[0],
-                  transactionNumberHandler: match$1[1]
-                }));
+            }, React.createElement("div", {
+                  className: "top-bar"
+                }, React.createElement("h1", undefined, "Expense Tracker")), React.createElement("div", {
+                  className: "all-content"
+                }, React.createElement(Balance.make, {
+                      allTransactions: transactions
+                    }), React.createElement($$History.make, {
+                      allTransactions: transactions
+                    }), React.createElement(Form.make, {
+                      onSubmitHandler: match[1],
+                      numberOfTransactions: numberOfTransactions,
+                      transactionNumberHandler: match$1[1]
+                    })));
 }
+
+var localTransactionValueOption$1 = localTransactionValueOption === null ? undefined : Caml_option.some(localTransactionValueOption);
+
+var localTransactionNumberOption$1 = localTransactionNumberOption === null ? undefined : Caml_option.some(localTransactionNumberOption);
 
 var make = App;
 
 export {
-  logo ,
-  initialState ,
+  localTransactionValueOption$1 as localTransactionValueOption,
+  localTransactionValue ,
+  initialStateTransactions ,
+  localTransactionNumberOption$1 as localTransactionNumberOption,
+  localTransactionNumber ,
+  initialStateNumber ,
   make ,
   
 }

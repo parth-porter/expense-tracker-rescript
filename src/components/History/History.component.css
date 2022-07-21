@@ -1,7 +1,74 @@
-.transaction-income{
-    background-color: palegreen;
+.history-item-positive{
+    background-color: #AFE1AF;
 }
 
-.transaction-expense{
-    background-color: tomato;
+.history-item-negative{
+    background-color: #E97451;
+}
+
+@media screen and (max-width: 500px){
+    .history-component{
+        /* background-color: dimgray; */
+        /* grid-area: listComponent; */
+        padding-left: 10px;
+        background-color: #eeeeee;
+
+    }
+
+    .history-parent{
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 501px){
+
+    .history-component{
+        /* background-color: dimgray; */
+        /* grid-area: listComponent; */
+        padding-left: 5px;
+        overflow-y: scroll;
+        background-color: #eeeeee;
+        
+    }
+
+}
+
+
+
+
+.history-item{
+    padding: 0 0 0 10px;
+    margin-bottom: 10px;
+    width: 95%;
+    box-shadow: 0 3px 5px rgb(0 0 0 / 0.2);
+    background-color: white;
+}
+
+.history-item-text{
+    display: flex;
+}   
+
+.history-item-description{
+    width: 80%;
+}
+
+.history-item-amount{
+    width: 15%;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.history-item-end-strip{
+    width: 5%;
+
+    display: flex;
+
+}
+
+.history-item-button{
+    background-color: transparent;
+    border: none;
+    width: 100%;
 }
