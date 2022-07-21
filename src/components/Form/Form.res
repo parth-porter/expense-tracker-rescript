@@ -1,7 +1,7 @@
 
 
 @react.component
-let make = (~onSubmitHandler) => {
+let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) => {
 
     let (input1, setInput1) = React.useState(_ => "")
     let (input2, setInput2) = React.useState(_ => "")
@@ -14,6 +14,7 @@ let make = (~onSubmitHandler) => {
         }
 
         let objectCreated: Transaction.t = {
+            id: numberOfTransactions,
             description: input1,
             amount: amountFloat,
             isPositive: (amountFloat > 0 ? true : false)
@@ -23,6 +24,10 @@ let make = (~onSubmitHandler) => {
             prev -> Js.Array2.concat([objectCreated])
         })
 
+        setInput1(_ => "")
+        setInput2(_ => "")
+
+        transactionNumberHandler(prev => prev + 1)
     }
   
 

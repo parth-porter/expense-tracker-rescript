@@ -18,6 +18,9 @@ function App(Props) {
         return initialState;
       });
   var transactions = match[0];
+  var match$1 = React.useState(function () {
+        return 0;
+      });
   return React.createElement("div", {
               className: "App"
             }, React.createElement("h1", undefined, "Expense Tracker"), React.createElement(Balance.make, {
@@ -25,7 +28,9 @@ function App(Props) {
                 }), React.createElement($$History.make, {
                   allTransactions: transactions
                 }), React.createElement(Form.make, {
-                  onSubmitHandler: match[1]
+                  onSubmitHandler: match[1],
+                  numberOfTransactions: match$1[0],
+                  transactionNumberHandler: match$1[1]
                 }));
 }
 

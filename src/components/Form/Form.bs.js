@@ -6,6 +6,8 @@ import * as Belt_Int from "rescript/lib/es6/belt_Int.js";
 
 function Form(Props) {
   var onSubmitHandler = Props.onSubmitHandler;
+  var numberOfTransactions = Props.numberOfTransactions;
+  var transactionNumberHandler = Props.transactionNumberHandler;
   var match = React.useState(function () {
         return "";
       });
@@ -38,12 +40,22 @@ function Form(Props) {
                       var amountFloat = amountTemp !== undefined ? amountTemp : 0;
                       var objectCreated_isPositive = amountFloat > 0;
                       var objectCreated = {
+                        id: numberOfTransactions,
                         description: input1,
                         amount: amountFloat,
                         isPositive: objectCreated_isPositive
                       };
-                      return Curry._1(onSubmitHandler, (function (prev) {
-                                    return prev.concat([objectCreated]);
+                      Curry._1(onSubmitHandler, (function (prev) {
+                              return prev.concat([objectCreated]);
+                            }));
+                      Curry._1(setInput1, (function (param) {
+                              return "";
+                            }));
+                      Curry._1(setInput2, (function (param) {
+                              return "";
+                            }));
+                      return Curry._1(transactionNumberHandler, (function (prev) {
+                                    return prev + 1 | 0;
                                   }));
                     })
                 }, "Submit"), React.createElement("hr", undefined));
