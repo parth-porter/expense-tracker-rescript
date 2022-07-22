@@ -3,10 +3,11 @@
 @scope("JSON") @val external parseIntoInt: string => int = "parse"
 
 let localDataTransactions = LocalStorage.getDataFromLocal("transactions-local")
-let initialStateTransactions = localDataTransactions != "" ? parseIntoArray(localDataTransactions) : []
+let initialStateTransactions = (localDataTransactions != "") ? parseIntoArray(localDataTransactions) : []
 
 let localTxnNumber = LocalStorage.getDataFromLocal("transactions-number-local")
-let initalTxnNumber = localTxnNumber != "" ? parseIntoInt(localTxnNumber) : 0
+let initalTxnNumber = (localTxnNumber != "") ? parseIntoInt(localTxnNumber) : 0
+
 
 @react.component
 let make = () => {
@@ -16,7 +17,7 @@ let make = () => {
 
   React.useEffect2(() => {
     LocalStorage.setDataToLocal("transactions-local", Js.Json.stringifyAny(transactions))
-    LocalStorage.setDataToLocal("transactions-number-local", Js.Json.stringifyAny(transactions))
+    LocalStorage.setDataToLocal("transactions-number-local", Js.Json.stringifyAny(numberOfTransactions))
     None
   }, (numberOfTransactions, transactions))
 
@@ -27,7 +28,7 @@ let make = () => {
     </div>
     <div className="all-content">
       <Balance allTransactions={transactions} />
-      <History allTransactions={transactions} />
+      <History allTransactions={transactions} transactionHandler={setTransactions}/>
       <Form
         onSubmitHandler={setTransactions}
         numberOfTransactions={numberOfTransactions}

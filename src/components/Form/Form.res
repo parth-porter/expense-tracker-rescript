@@ -9,7 +9,8 @@ let initalInputs: FormData.inputs = {
 let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) => {
   let (formInputs, setFormInputs) = React.useState(_ => initalInputs)
 
-  let onSubmitClick = () => {
+  let onSubmitClick = (event) => {
+    ReactEvent.Form.preventDefault(event)
     FormSubmit.onSubmitClick(
       formInputs,
       numberOfTransactions,
@@ -21,6 +22,7 @@ let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) 
   }
 
   <div className="form-component">
+  <form onSubmit={event => onSubmitClick(event)}>
     <h3> {"Transaction Entry"->React.string} </h3>
     <hr />
     <div className="form-inputs" />
@@ -31,6 +33,7 @@ let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) 
       type_="text"
       value={formInputs.input1}
       onChange={event => FormSubmit.inputEventHandler(event, FormSubmit.Input1, setFormInputs)}
+      required=true
     />
     <br />
     <br />
@@ -39,12 +42,15 @@ let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) 
     <input
       className="form-input2"
       type_="number"
+      step=0.01
       value={formInputs.input2}
       onChange={event => FormSubmit.inputEventHandler(event, FormSubmit.Input2, setFormInputs)}
+      required=true
     />
     <br />
-    <button onClick={_ => onSubmitClick()} className="button-submit">
+    <button type_="submit" className="button-submit">
       {"Submit"->React.string}
     </button>
+    </form>
   </div>
 }

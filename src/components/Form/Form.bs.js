@@ -23,25 +23,9 @@ function Form(Props) {
   var formInputs = match[0];
   return React.createElement("div", {
               className: "form-component"
-            }, React.createElement("h3", undefined, "Transaction Entry"), React.createElement("hr", undefined), React.createElement("div", {
-                  className: "form-inputs"
-                }), React.createElement("label", undefined, "Description"), React.createElement("br", undefined), React.createElement("input", {
-                  className: "form-input1",
-                  type: "text",
-                  value: formInputs.input1,
-                  onChange: (function ($$event) {
-                      return FormSubmit.inputEventHandler($$event, /* Input1 */0, setFormInputs);
-                    })
-                }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("label", undefined, "Amount"), React.createElement("br", undefined), React.createElement("input", {
-                  className: "form-input2",
-                  type: "number",
-                  value: formInputs.input2,
-                  onChange: (function ($$event) {
-                      return FormSubmit.inputEventHandler($$event, /* Input2 */1, setFormInputs);
-                    })
-                }), React.createElement("br", undefined), React.createElement("button", {
-                  className: "button-submit",
-                  onClick: (function (param) {
+            }, React.createElement("form", {
+                  onSubmit: (function ($$event) {
+                      $$event.preventDefault();
                       FormSubmit.onSubmitClick(formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
                       return Curry._1(setFormInputs, (function (param) {
                                     return {
@@ -50,7 +34,29 @@ function Form(Props) {
                                           };
                                   }));
                     })
-                }, "Submit"));
+                }, React.createElement("h3", undefined, "Transaction Entry"), React.createElement("hr", undefined), React.createElement("div", {
+                      className: "form-inputs"
+                    }), React.createElement("label", undefined, "Description"), React.createElement("br", undefined), React.createElement("input", {
+                      className: "form-input1",
+                      required: true,
+                      type: "text",
+                      value: formInputs.input1,
+                      onChange: (function ($$event) {
+                          return FormSubmit.inputEventHandler($$event, /* Input1 */0, setFormInputs);
+                        })
+                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("label", undefined, "Amount"), React.createElement("br", undefined), React.createElement("input", {
+                      className: "form-input2",
+                      required: true,
+                      step: 0.01,
+                      type: "number",
+                      value: formInputs.input2,
+                      onChange: (function ($$event) {
+                          return FormSubmit.inputEventHandler($$event, /* Input2 */1, setFormInputs);
+                        })
+                    }), React.createElement("br", undefined), React.createElement("button", {
+                      className: "button-submit",
+                      type: "submit"
+                    }, "Submit")));
 }
 
 var make = Form;

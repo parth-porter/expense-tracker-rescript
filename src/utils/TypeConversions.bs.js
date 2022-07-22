@@ -3,13 +3,15 @@
 import * as Belt_Float from "rescript/lib/es6/belt_Float.js";
 
 function float_to_RString(input) {
-  return String(input);
+  return input.toFixed(2);
 }
 
 function string_to_float(input) {
   var holder1 = Belt_Float.fromString(input);
-  if (holder1 !== undefined) {
-    return holder1;
+  var holder2 = holder1 !== undefined ? holder1 : 0.0;
+  var holder3 = Belt_Float.fromString(holder2.toFixed(2));
+  if (holder3 !== undefined) {
+    return holder3;
   } else {
     return 0.0;
   }

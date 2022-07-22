@@ -21,6 +21,7 @@ function App(Props) {
   var match = React.useState(function () {
         return initialStateTransactions;
       });
+  var setTransactions = match[1];
   var transactions = match[0];
   var match$1 = React.useState(function () {
         return initalTxnNumber;
@@ -28,7 +29,7 @@ function App(Props) {
   var numberOfTransactions = match$1[0];
   React.useEffect((function () {
           LocalStorage.setDataToLocal("transactions-local", JSON.stringify(transactions));
-          LocalStorage.setDataToLocal("transactions-number-local", JSON.stringify(transactions));
+          LocalStorage.setDataToLocal("transactions-number-local", JSON.stringify(numberOfTransactions));
           
         }), [
         numberOfTransactions,
@@ -43,9 +44,10 @@ function App(Props) {
                 }, React.createElement(Balance.make, {
                       allTransactions: transactions
                     }), React.createElement($$History.make, {
-                      allTransactions: transactions
+                      allTransactions: transactions,
+                      transactionHandler: setTransactions
                     }), React.createElement(Form.make, {
-                      onSubmitHandler: match[1],
+                      onSubmitHandler: setTransactions,
                       numberOfTransactions: numberOfTransactions,
                       transactionNumberHandler: match$1[1]
                     })), React.createElement("div", {

@@ -28,9 +28,12 @@
         /* background-color: dimgray; */
         /* grid-area: listComponent; */
         padding-left: 5px;
-        overflow-y: scroll;
         background-color: #eeeeee;
         
+    }
+
+    .history-parent{
+        overflow-y: scroll;
     }
 
 }

@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
+import * as HistoryHandling from "../../utils/HistoryHandling.bs.js";
 import * as TypeConversions from "../../utils/TypeConversions.bs.js";
 
 import './History.component.css';
@@ -9,6 +10,7 @@ import './History.component.css';
 
 function $$History(Props) {
   var allTransactions = Props.allTransactions;
+  var transactionHandler = Props.transactionHandler;
   return React.createElement("div", {
               className: "history-component"
             }, React.createElement("h3", {
@@ -30,9 +32,12 @@ function $$History(Props) {
                                             className: "history-item-end-strip " + bgColor
                                           }, React.createElement("button", {
                                                 className: "history-item-button",
-                                                id: String(transaction.id)
-                                              }))));
-                      }))), React.createElement("hr", undefined));
+                                                id: String(transaction.id),
+                                                onClick: (function ($$event) {
+                                                    return HistoryHandling.deleteTransaction(transactionHandler, transaction.id, allTransactions);
+                                                  })
+                                              }, "X"))));
+                      }))));
 }
 
 var make = $$History;

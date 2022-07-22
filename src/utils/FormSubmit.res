@@ -4,6 +4,7 @@ type inputSelection =
 
 
 let onSubmitClick = (formInputs: FormData.inputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler) => {
+    //adds the transaction to the state
         let amountFloat = TypeConversions.string_to_float(formInputs.input2)
 
         let objectCreated: Transaction.t = {
@@ -18,9 +19,11 @@ let onSubmitClick = (formInputs: FormData.inputs, numberOfTransactions, onSubmit
         })
 
         transactionNumberHandler(prev => prev + 1)
+        Js.Console.log(objectCreated)
 }
 
 let inputEventHandler = (event, inputSelector: inputSelection, setFormInputs) => {
+    //handles changes in the input fields of the form
     let newValue = ReactEvent.Form.target(event)["value"]
     
     switch inputSelector {

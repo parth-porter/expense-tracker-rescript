@@ -1,7 +1,7 @@
 %%raw(`import './History.component.css';`)
 
 @react.component
-let make = (~allTransactions: array<Transaction.t>) => {
+let make = (~allTransactions: array<Transaction.t>, ~transactionHandler) => {
   <div className="history-component">
     <h3 className="history-title"> {"Transaction History"->React.string} </h3>
     <hr />
@@ -17,13 +17,15 @@ let make = (~allTransactions: array<Transaction.t>) => {
               {TypeConversions.float_to_RString(transaction.amount)}
             </p>
             <div className={`history-item-end-strip ${bgColor}`}>
-              <button id={transaction.id->Belt.Int.toString} className="history-item-button" />
+              <button id={transaction.id->Belt.Int.toString} className="history-item-button" 
+              onClick={event => HistoryHandling.deleteTransaction(~transactionHandler=transactionHandler, ~transactionNumber=transaction.id, ~transactions={allTransactions})}>
+              {"X"->React.string}
+              </button>
             </div>
           </div>
         </div>
       })
       ->React.array}
     </div>
-    <hr />
   </div>
 }
