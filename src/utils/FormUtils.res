@@ -7,7 +7,7 @@ let onSubmitClick = (formInputs: FormData.inputs, numberOfTransactions, onSubmit
     //adds the transaction to the state
         let amountFloat = TypeConversions.string_to_float(formInputs.input2)
 
-        let objectCreated: Transaction.t = {
+        let objectCreated: Transaction.structure = {
             id: numberOfTransactions,
             description: formInputs.input1,
             amount: amountFloat,
@@ -19,7 +19,6 @@ let onSubmitClick = (formInputs: FormData.inputs, numberOfTransactions, onSubmit
         })
 
         transactionNumberHandler(prev => prev + 1)
-        Js.Console.log(objectCreated)
 }
 
 let inputEventHandler = (event, inputSelector: inputSelection, setFormInputs) => {

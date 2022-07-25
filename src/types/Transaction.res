@@ -1,4 +1,4 @@
-type t = {
+type structure = {
   id: int,
   description: string,
   amount: float,

@@ -5,28 +5,24 @@ import * as React from "react";
 import * as Balance from "./components/Balance/Balance.bs.js";
 import * as $$History from "./components/History/History.bs.js";
 import * as LocalStorage from "./utils/LocalStorage.bs.js";
+import * as ComponentHeadings from "./static/ComponentHeadings.bs.js";
 
 import './App.css';
 ;
 
-var localDataTransactions = LocalStorage.getDataFromLocal("transactions-local");
-
-var initialStateTransactions = localDataTransactions !== "" ? JSON.parse(localDataTransactions) : [];
-
-var localTxnNumber = LocalStorage.getDataFromLocal("transactions-number-local");
-
-var initalTxnNumber = localTxnNumber !== "" ? JSON.parse(localTxnNumber) : 0;
-
 function App(Props) {
-  var match = React.useState(function () {
+  var match = LocalStorage.localDataWrapper(undefined);
+  var initalTxnNumber = match[1];
+  var initialStateTransactions = match[0];
+  var match$1 = React.useState(function () {
         return initialStateTransactions;
       });
-  var setTransactions = match[1];
-  var transactions = match[0];
-  var match$1 = React.useState(function () {
+  var setTransactions = match$1[1];
+  var transactions = match$1[0];
+  var match$2 = React.useState(function () {
         return initalTxnNumber;
       });
-  var numberOfTransactions = match$1[0];
+  var numberOfTransactions = match$2[0];
   React.useEffect((function () {
           LocalStorage.setDataToLocal("transactions-local", JSON.stringify(transactions));
           LocalStorage.setDataToLocal("transactions-number-local", JSON.stringify(numberOfTransactions));
@@ -39,7 +35,7 @@ function App(Props) {
               className: "App"
             }, React.createElement("div", {
                   className: "top-bar"
-                }, React.createElement("h1", undefined, "Expense Tracker")), React.createElement("div", {
+                }, React.createElement("h1", undefined, ComponentHeadings.overallHeader)), React.createElement("div", {
                   className: "all-content"
                 }, React.createElement(Balance.make, {
                       allTransactions: transactions
@@ -49,19 +45,15 @@ function App(Props) {
                     }), React.createElement(Form.make, {
                       onSubmitHandler: setTransactions,
                       numberOfTransactions: numberOfTransactions,
-                      transactionNumberHandler: match$1[1]
+                      transactionNumberHandler: match$2[1]
                     })), React.createElement("div", {
                   className: "footer"
-                }, React.createElement("p", undefined, "Made with <3 and ReScript")));
+                }, React.createElement("p", undefined, ComponentHeadings.footerText)));
 }
 
 var make = App;
 
 export {
-  localDataTransactions ,
-  initialStateTransactions ,
-  localTxnNumber ,
-  initalTxnNumber ,
   make ,
   
 }

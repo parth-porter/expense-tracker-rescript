@@ -1,3 +1,6 @@
+@scope("JSON") @val external parseIntoArray: string => array<Transaction.structure> = "parse"
+@scope("JSON") @val external parseIntoInt: string => int = "parse"
+
 type localDataType =
   | LocalArray
   | LocalInt
@@ -20,3 +23,13 @@ let setDataToLocal = (dataField: string, data: option<string>) => {
   Dom_storage2.setItem(Dom_storage2.localStorage, dataField, dataExtracted)
 }
 
+let localDataWrapper = () => {
+  let localDataTransactions = getDataFromLocal("transactions-local")
+  let initialStateTransactions =
+    localDataTransactions != "" ? parseIntoArray(localDataTransactions) : []
+
+  let localTxnNumber = getDataFromLocal("transactions-number-local")
+  let initalTxnNumber = localTxnNumber != "" ? parseIntoInt(localTxnNumber) : 0
+
+  (initialStateTransactions, initalTxnNumber)
+}

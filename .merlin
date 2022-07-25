@@ -7,6 +7,8 @@ S /Users/parthbisen/code/expense-tracker-rescript/node_modules/@rescript/react/l
 B /Users/parthbisen/code/expense-tracker-rescript/node_modules/@rescript/react/lib/ocaml
 S src
 B lib/bs/src
+S src/static
+B lib/bs/src/static
 S src/components/History
 B lib/bs/src/components/History
 S src/components/Balance

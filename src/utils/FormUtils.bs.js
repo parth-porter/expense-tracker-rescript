@@ -16,11 +16,9 @@ function onSubmitClick(formInputs, numberOfTransactions, onSubmitHandler, transa
   Curry._1(onSubmitHandler, (function (prev) {
           return prev.concat([objectCreated]);
         }));
-  Curry._1(transactionNumberHandler, (function (prev) {
-          return prev + 1 | 0;
-        }));
-  console.log(objectCreated);
-  
+  return Curry._1(transactionNumberHandler, (function (prev) {
+                return prev + 1 | 0;
+              }));
 }
 
 function inputEventHandler($$event, inputSelector, setFormInputs) {

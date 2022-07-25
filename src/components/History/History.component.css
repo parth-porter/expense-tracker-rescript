@@ -6,7 +6,7 @@
     background-color: #E97451;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 750px){
     .history-component{
         /* background-color: dimgray; */
         /* grid-area: listComponent; */
@@ -17,12 +17,11 @@
 
     .history-parent{
         overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
         height: 200px;
     }
 }
 
-@media screen and (min-width: 501px){
+@media screen and (min-width: 751px){
 
     .history-component{
         /* background-color: dimgray; */
@@ -54,11 +53,11 @@
 }   
 
 .history-item-description{
-    width: 80%;
+    width: 60%;
 }
 
 .history-item-amount{
-    width: 15%;
+    width: 35%;
     text-align: right;
     padding-right: 5px;
 }

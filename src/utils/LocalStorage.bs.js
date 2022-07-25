@@ -16,9 +16,21 @@ function setDataToLocal(dataField, data) {
   
 }
 
+function localDataWrapper(param) {
+  var localDataTransactions = getDataFromLocal("transactions-local");
+  var initialStateTransactions = localDataTransactions !== "" ? JSON.parse(localDataTransactions) : [];
+  var localTxnNumber = getDataFromLocal("transactions-number-local");
+  var initalTxnNumber = localTxnNumber !== "" ? JSON.parse(localTxnNumber) : 0;
+  return [
+          initialStateTransactions,
+          initalTxnNumber
+        ];
+}
+
 export {
   getDataFromLocal ,
   setDataToLocal ,
+  localDataWrapper ,
   
 }
 /* No side effect */

@@ -2,7 +2,8 @@
 
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
-import * as FormSubmit from "../../utils/FormSubmit.bs.js";
+import * as FormUtils from "../../utils/FormUtils.bs.js";
+import * as FormStatic from "../../static/FormStatic.bs.js";
 
 import './form-component-styles.css';
 ;
@@ -26,7 +27,7 @@ function Form(Props) {
             }, React.createElement("form", {
                   onSubmit: (function ($$event) {
                       $$event.preventDefault();
-                      FormSubmit.onSubmitClick(formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
+                      FormUtils.onSubmitClick(formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
                       return Curry._1(setFormInputs, (function (param) {
                                     return {
                                             input1: "",
@@ -34,29 +35,34 @@ function Form(Props) {
                                           };
                                   }));
                     })
-                }, React.createElement("h3", undefined, "Transaction Entry"), React.createElement("hr", undefined), React.createElement("div", {
+                }, React.createElement("h3", undefined, FormStatic.heading), React.createElement("hr", undefined), React.createElement("div", {
                       className: "form-inputs"
-                    }), React.createElement("label", undefined, "Description"), React.createElement("br", undefined), React.createElement("input", {
+                    }), React.createElement("label", undefined, FormStatic.input1Label), React.createElement("br", undefined), React.createElement("input", {
                       className: "form-input1",
+                      title: FormStatic.input1TooltipText,
+                      pattern: FormStatic.input1RegEx,
+                      placeholder: FormStatic.input1Placeholder,
                       required: true,
                       type: "text",
                       value: formInputs.input1,
                       onChange: (function ($$event) {
-                          return FormSubmit.inputEventHandler($$event, /* Input1 */0, setFormInputs);
+                          return FormUtils.inputEventHandler($$event, /* Input1 */0, setFormInputs);
                         })
-                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("label", undefined, "Amount"), React.createElement("br", undefined), React.createElement("input", {
+                    }), React.createElement("br", undefined), React.createElement("br", undefined), React.createElement("label", undefined, FormStatic.input2Label), React.createElement("br", undefined), React.createElement("input", {
                       className: "form-input2",
+                      title: FormStatic.input2TooltipText,
+                      pattern: FormStatic.input2RegEx,
+                      placeholder: FormStatic.input2Placeholder,
                       required: true,
-                      step: 0.01,
-                      type: "number",
+                      type: "text",
                       value: formInputs.input2,
                       onChange: (function ($$event) {
-                          return FormSubmit.inputEventHandler($$event, /* Input2 */1, setFormInputs);
+                          return FormUtils.inputEventHandler($$event, /* Input2 */1, setFormInputs);
                         })
                     }), React.createElement("br", undefined), React.createElement("button", {
                       className: "button-submit",
                       type: "submit"
-                    }, "Submit")));
+                    }, FormStatic.buttonText)));
 }
 
 var make = Form;

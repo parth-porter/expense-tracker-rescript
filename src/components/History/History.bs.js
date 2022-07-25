@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
-import * as HistoryHandling from "../../utils/HistoryHandling.bs.js";
+import * as HistoryUtils from "../../utils/HistoryUtils.bs.js";
+import * as HistoryStatic from "../../static/HistoryStatic.bs.js";
 import * as TypeConversions from "../../utils/TypeConversions.bs.js";
 
 import './History.component.css';
@@ -15,7 +16,7 @@ function $$History(Props) {
               className: "history-component"
             }, React.createElement("h3", {
                   className: "history-title"
-                }, "Transaction History"), React.createElement("hr", undefined), React.createElement("div", {
+                }, HistoryStatic.header), React.createElement("hr", undefined), React.createElement("div", {
                   className: "history-parent"
                 }, Belt_Array.map(allTransactions, (function (transaction) {
                         var bgColor = transaction.isPositive ? "history-item-positive" : "history-item-negative";
@@ -34,7 +35,7 @@ function $$History(Props) {
                                                 className: "history-item-button",
                                                 id: String(transaction.id),
                                                 onClick: (function ($$event) {
-                                                    return HistoryHandling.deleteTransaction(transactionHandler, transaction.id, allTransactions);
+                                                    return HistoryUtils.deleteTransaction(transactionHandler, transaction.id, allTransactions);
                                                   })
                                               }, "X"))));
                       }))));

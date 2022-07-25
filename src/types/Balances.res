@@ -3,7 +3,3 @@ type balanceStructure = {
     mutable income: float,
     mutable expense: float
 }
-
-type nos = {
-    mutable number: int
-}

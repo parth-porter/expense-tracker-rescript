@@ -9,9 +9,9 @@ let initalInputs: FormData.inputs = {
 let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) => {
   let (formInputs, setFormInputs) = React.useState(_ => initalInputs)
 
-  let onSubmitClick = (event) => {
+  let onSubmitClick = event => {
     ReactEvent.Form.preventDefault(event)
-    FormSubmit.onSubmitClick(
+    FormUtils.onSubmitClick(
       formInputs,
       numberOfTransactions,
       onSubmitHandler,
@@ -22,35 +22,40 @@ let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) 
   }
 
   <div className="form-component">
-  <form onSubmit={event => onSubmitClick(event)}>
-    <h3> {"Transaction Entry"->React.string} </h3>
-    <hr />
-    <div className="form-inputs" />
-    <label> {"Description"->React.string} </label>
-    <br />
-    <input
-      className="form-input1"
-      type_="text"
-      value={formInputs.input1}
-      onChange={event => FormSubmit.inputEventHandler(event, FormSubmit.Input1, setFormInputs)}
-      required=true
-    />
-    <br />
-    <br />
-    <label> {"Amount"->React.string} </label>
-    <br />
-    <input
-      className="form-input2"
-      type_="number"
-      step=0.01
-      value={formInputs.input2}
-      onChange={event => FormSubmit.inputEventHandler(event, FormSubmit.Input2, setFormInputs)}
-      required=true
-    />
-    <br />
-    <button type_="submit" className="button-submit">
-      {"Submit"->React.string}
-    </button>
+    <form onSubmit={event => onSubmitClick(event)}>
+      <h3> FormStatic.heading </h3>
+      <hr />
+      <div className="form-inputs" />
+      <label> FormStatic.input1Label </label>
+      <br />
+      <input
+        className="form-input1"
+        type_="text"
+        pattern=FormStatic.input1RegEx
+        placeholder=FormStatic.input1Placeholder
+        title=FormStatic.input1TooltipText
+        value={formInputs.input1}
+        onChange={event => FormUtils.inputEventHandler(event, FormUtils.Input1, setFormInputs)}
+        required=true
+      />
+      <br />
+      <br />
+
+      <label> FormStatic.input2Label </label>
+      <br />
+      <input
+        className="form-input2"
+        type_="text"
+        pattern=FormStatic.input2RegEx
+        title=FormStatic.input2TooltipText
+        placeholder=FormStatic.input2Placeholder
+        value={formInputs.input2}
+        onChange={event => FormUtils.inputEventHandler(event, FormUtils.Input2, setFormInputs)}
+        required=true
+      />
+      <br />
+      
+      <button type_="submit" className="button-submit"> {FormStatic.buttonText} </button>
     </form>
   </div>
 }

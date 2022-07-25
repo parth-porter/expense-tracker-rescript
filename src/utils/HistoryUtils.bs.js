@@ -6,17 +6,15 @@ import * as Js_int from "rescript/lib/es6/js_int.js";
 function deleteTransaction(transactionHandler, transactionNumber, transactions) {
   var transactionCopy = transactions.slice();
   transactionCopy.forEach(function (x, index) {
-        if (!Js_int.equal(x.id, transactionNumber)) {
+        if (Js_int.equal(x.id, transactionNumber)) {
+          transactionCopy.splice(index, 1);
           return ;
         }
-        var wtf = transactionCopy.splice(index, 1);
-        Curry._1(transactionHandler, (function (param) {
-                return transactionCopy;
-              }));
-        console.log(transactionCopy, wtf);
         
       });
-  
+  return Curry._1(transactionHandler, (function (param) {
+                return transactionCopy;
+              }));
 }
 
 export {
