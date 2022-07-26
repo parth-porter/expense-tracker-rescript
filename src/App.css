@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+body{
+    height: 100vh;
+    margin: 0;
+    background-color: #eeeeee;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+
+#root, .App{
+    height: 100vh;
+    background-color: #eeeeee;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.top-bar{
+    height: 7vh;
+    box-sizing: border-box;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.top-bar h1{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    margin-top: 0;
+    border-bottom: 1.5px black solid;
+    box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+@media sceen and (max-width: 750px){
+    .all-content{
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        height: 88vh;
+    }
+    
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@media screen and (min-width: 751px){
+
+    .all-content{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: 1fr 2fr;
+        height: 88vh;
+    }
+    
+    .history-component{
+        grid-column-start: 2;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 3;
+    }
+
+
 }
+
+.footer{
+    font-weight: bold;
+    text-align: center;
+    box-sizing: content-box;
+    background-color: white;
+    height: 3vh;
+}
+
+
+
+

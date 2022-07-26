@@ -1,0 +1,24 @@
+####{BSB GENERATED: NO EDIT
+FLG -ppx '/Users/parthbisen/code/expense-tracker-rescript/node_modules/rescript/darwin/bsc.exe -as-ppx -bs-jsx 3'
+S /Users/parthbisen/code/expense-tracker-rescript/node_modules/rescript/lib/ocaml
+B /Users/parthbisen/code/expense-tracker-rescript/node_modules/rescript/lib/ocaml
+FLG -w +a-4-9-20-40-41-42-50-61-102
+S /Users/parthbisen/code/expense-tracker-rescript/node_modules/@rescript/react/lib/ocaml
+B /Users/parthbisen/code/expense-tracker-rescript/node_modules/@rescript/react/lib/ocaml
+S src
+B lib/bs/src
+S src/static
+B lib/bs/src/static
+S src/components/History
+B lib/bs/src/components/History
+S src/components/Edit
+B lib/bs/src/components/Edit
+S src/components/Balance
+B lib/bs/src/components/Balance
+S src/components/Form
+B lib/bs/src/components/Form
+S src/utils
+B lib/bs/src/utils
+S src/types
+B lib/bs/src/types
+####BSB GENERATED: NO EDIT}
