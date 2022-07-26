@@ -1,5 +1,7 @@
 let float_to_RString = (input: float) : React.element => {
-    input->Js.Float.toFixedWithPrecision(~digits=2)->React.string
+
+    React.string("$"++input->Js.Float.toFixedWithPrecision(~digits=2))
+    
 }
 
 let string_to_float = (input: string): float => {

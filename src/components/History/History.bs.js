@@ -6,12 +6,13 @@ import * as HistoryUtils from "../../utils/HistoryUtils.bs.js";
 import * as HistoryStatic from "../../static/HistoryStatic.bs.js";
 import * as TypeConversions from "../../utils/TypeConversions.bs.js";
 
-import './History.component.css';
+import './history-component-styles.css';
 ;
 
 function $$History(Props) {
   var allTransactions = Props.allTransactions;
   var transactionHandler = Props.transactionHandler;
+  var editTxnToggle = Props.editTxnToggle;
   return React.createElement("div", {
               className: "history-component"
             }, React.createElement("h3", {
@@ -37,7 +38,17 @@ function $$History(Props) {
                                                 onClick: (function ($$event) {
                                                     return HistoryUtils.deleteTransaction(transactionHandler, transaction.id, allTransactions);
                                                   })
-                                              }, "X"))));
+                                              }, React.createElement("i", {
+                                                    className: "fa-solid fa-trash"
+                                                  })), React.createElement("button", {
+                                                className: "history-item-edit-button",
+                                                id: String(transaction.id),
+                                                onClick: (function ($$event) {
+                                                    return HistoryUtils.editTransaction(editTxnToggle, transaction.id, allTransactions);
+                                                  })
+                                              }, React.createElement("i", {
+                                                    className: "fa fa-edit"
+                                                  })))));
                       }))));
 }
 

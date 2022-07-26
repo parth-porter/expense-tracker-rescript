@@ -53,17 +53,17 @@
 }   
 
 .history-item-description{
-    width: 60%;
+    width: 45%;
 }
 
 .history-item-amount{
-    width: 35%;
+    width: 40%;
     text-align: right;
     padding-right: 5px;
 }
 
 .history-item-end-strip{
-    width: 5%;
+    width: 15%;
 
     display: flex;
 
@@ -72,5 +72,12 @@
 .history-item-button{
     background-color: transparent;
     border: none;
-    width: 100%;
+    width: 50%;
+}
+
+.history-item-edit-button{
+    width: 50%;
+    background-color: transparent;
+    border: none;
+    border-left: 1px black solid;
 }

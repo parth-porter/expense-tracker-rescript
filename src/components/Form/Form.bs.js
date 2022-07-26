@@ -17,6 +17,7 @@ function Form(Props) {
   var onSubmitHandler = Props.onSubmitHandler;
   var numberOfTransactions = Props.numberOfTransactions;
   var transactionNumberHandler = Props.transactionNumberHandler;
+  var onSubmitClick = Props.onSubmitClick;
   var match = React.useState(function () {
         return initalInputs;
       });
@@ -27,7 +28,7 @@ function Form(Props) {
             }, React.createElement("form", {
                   onSubmit: (function ($$event) {
                       $$event.preventDefault();
-                      FormUtils.onSubmitClick(formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
+                      Curry._4(onSubmitClick, formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
                       return Curry._1(setFormInputs, (function (param) {
                                     return {
                                             input1: "",

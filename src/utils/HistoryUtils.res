@@ -8,6 +8,13 @@ let deleteTransaction = (~transactionHandler, ~transactionNumber, ~transactions)
     })
 
     transactionHandler(_ => transactionCopy)
+}
 
-    
+let editTransaction = (~editWindowToggle, ~transactionNumber, ~transactions) => {
+    Js.Array2.forEachi(transactions, (x: Transaction.structure, index) => {
+        if Js.Int.equal(x.id,transactionNumber) {
+            Edit.setIndex(~inputIndex = index)
+        }
+    })
+    let _ = editWindowToggle(prev => !prev)
 }

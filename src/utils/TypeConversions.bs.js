@@ -3,7 +3,7 @@
 import * as Belt_Float from "rescript/lib/es6/belt_Float.js";
 
 function float_to_RString(input) {
-  return input.toFixed(2);
+  return "$" + input.toFixed(2);
 }
 
 function string_to_float(input) {

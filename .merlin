@@ -11,6 +11,8 @@ S src/static
 B lib/bs/src/static
 S src/components/History
 B lib/bs/src/components/History
+S src/components/Edit
+B lib/bs/src/components/Edit
 S src/components/Balance
 B lib/bs/src/components/Balance
 S src/components/Form

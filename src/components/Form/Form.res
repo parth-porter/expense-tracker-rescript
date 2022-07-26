@@ -6,16 +6,16 @@ let initalInputs: FormData.inputs = {
 }
 
 @react.component
-let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler) => {
+let make = (~onSubmitHandler, ~numberOfTransactions, ~transactionNumberHandler, ~onSubmitClick) => {
   let (formInputs, setFormInputs) = React.useState(_ => initalInputs)
 
   let onSubmitClick = event => {
     ReactEvent.Form.preventDefault(event)
-    FormUtils.onSubmitClick(
+    onSubmitClick(
       formInputs,
       numberOfTransactions,
       onSubmitHandler,
-      transactionNumberHandler,
+      transactionNumberHandler
     )
 
     setFormInputs(_ => {input1: "", input2: ""})

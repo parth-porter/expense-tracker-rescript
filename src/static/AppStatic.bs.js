@@ -3,7 +3,7 @@
 
 var overallHeader = "Expense Tracker";
 
-var footerText = "Made with <3 and ReScript";
+var footerText = "Made with ReScript :)";
 
 export {
   overallHeader ,
