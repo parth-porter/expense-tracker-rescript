@@ -4,7 +4,7 @@ import * as Edit from "../components/Edit/Edit.bs.js";
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as Js_int from "rescript/lib/es6/js_int.js";
 
-function deleteTransaction(transactionHandler, transactionNumber, transactions) {
+function deleteTransaction(transaction_setter, transactionNumber, transactions) {
   var transactionCopy = transactions.slice();
   transactionCopy.forEach(function (x, index) {
         if (Js_int.equal(x.id, transactionNumber)) {
@@ -13,7 +13,7 @@ function deleteTransaction(transactionHandler, transactionNumber, transactions) 
         }
         
       });
-  return Curry._1(transactionHandler, (function (param) {
+  return Curry._1(transaction_setter, (function (param) {
                 return transactionCopy;
               }));
 }

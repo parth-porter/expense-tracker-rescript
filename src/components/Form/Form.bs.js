@@ -3,6 +3,7 @@
 import * as Curry from "rescript/lib/es6/curry.js";
 import * as React from "react";
 import * as FormUtils from "../../utils/FormUtils.bs.js";
+import * as ContextTxn from "../Context/ContextTxn.bs.js";
 import * as FormStatic from "../../static/FormStatic.bs.js";
 
 import './form-component-styles.css';
@@ -14,21 +15,22 @@ var initalInputs = {
 };
 
 function Form(Props) {
-  var onSubmitHandler = Props.onSubmitHandler;
-  var numberOfTransactions = Props.numberOfTransactions;
-  var transactionNumberHandler = Props.transactionNumberHandler;
   var onSubmitClick = Props.onSubmitClick;
   var match = React.useState(function () {
         return initalInputs;
       });
   var setFormInputs = match[1];
   var formInputs = match[0];
+  var match$1 = React.useContext(ContextTxn.TxnContext.context);
+  var transaction_number_setter = match$1.transaction_number_setter;
+  var transaction_number = match$1.transaction_number;
+  var transaction_setter = match$1.transaction_setter;
   return React.createElement("div", {
               className: "form-component"
             }, React.createElement("form", {
                   onSubmit: (function ($$event) {
                       $$event.preventDefault();
-                      Curry._4(onSubmitClick, formInputs, numberOfTransactions, onSubmitHandler, transactionNumberHandler);
+                      Curry._4(onSubmitClick, formInputs, transaction_number, transaction_setter, transaction_number_setter);
                       return Curry._1(setFormInputs, (function (param) {
                                     return {
                                             input1: "",

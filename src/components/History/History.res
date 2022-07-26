@@ -1,16 +1,13 @@
 %%raw(`import './history-component-styles.css';`)
 
 @react.component
-let make = (
-  ~allTransactions: array<Transaction.structure>,
-  ~transactionHandler,
-  ~editTxnToggle,
-) => {
+let make = (~editTxnToggle) => {
+  let {transactions, transaction_setter} = React.useContext(ContextTxn.TxnContext.context)
   <div className="history-component">
     <h3 className="history-title"> {HistoryStatic.header} </h3>
     <hr />
     <div className="history-parent">
-      {allTransactions
+      {transactions
       ->Belt.Array.map((transaction: Transaction.structure) => {
         let bgColor = transaction.isPositive ? "history-item-positive" : "history-item-negative"
 
@@ -26,23 +23,22 @@ let make = (
                 className="history-item-button"
                 onClick={event =>
                   HistoryUtils.deleteTransaction(
-                    ~transactionHandler,
+                    ~transaction_setter,
                     ~transactionNumber=transaction.id,
-                    ~transactions={allTransactions},
+                    ~transactions={transactions},
                   )}>
-                <i className="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash" />
               </button>
-              <button 
+              <button
                 id={transaction.id->Belt.Int.toString}
                 className="history-item-edit-button"
                 onClick={event =>
                   HistoryUtils.editTransaction(
                     ~editWindowToggle={editTxnToggle},
                     ~transactionNumber=transaction.id,
-                    ~transactions={allTransactions},
+                    ~transactions={transactions},
                   )}>
-                <i className="fa fa-edit"></i>
-      
+                <i className="fa fa-edit" />
               </button>
             </div>
           </div>

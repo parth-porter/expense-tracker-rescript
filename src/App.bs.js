@@ -7,6 +7,7 @@ import * as Balance from "./components/Balance/Balance.bs.js";
 import * as $$History from "./components/History/History.bs.js";
 import * as AppStatic from "./static/AppStatic.bs.js";
 import * as FormUtils from "./utils/FormUtils.bs.js";
+import * as ContextTxn from "./components/Context/ContextTxn.bs.js";
 import * as LocalStorage from "./utils/LocalStorage.bs.js";
 
 import './App.css';
@@ -47,18 +48,19 @@ function App(Props) {
                   className: "top-bar"
                 }, React.createElement("h1", undefined, AppStatic.overallHeader)), React.createElement("div", {
                   className: "all-content"
-                }, React.createElement(Balance.make, {
-                      allTransactions: transactions
-                    }), React.createElement($$History.make, {
-                      allTransactions: transactions,
-                      transactionHandler: setTransactions,
-                      editTxnToggle: setEditStatus
-                    }), React.createElement(Form.make, {
-                      onSubmitHandler: setTransactions,
-                      numberOfTransactions: numberOfTransactions,
-                      transactionNumberHandler: match$2[1],
-                      onSubmitClick: FormUtils.onSubmitClick
-                    })), React.createElement("div", {
+                }, React.createElement(ContextTxn.TxnContext.Provider.make, {
+                      value: {
+                        transactions: transactions,
+                        transaction_setter: setTransactions,
+                        transaction_number: numberOfTransactions,
+                        transaction_number_setter: match$2[1]
+                      },
+                      children: null
+                    }, React.createElement(Balance.make, {}), React.createElement($$History.make, {
+                          editTxnToggle: setEditStatus
+                        }), React.createElement(Form.make, {
+                          onSubmitClick: FormUtils.onSubmitClick
+                        }))), React.createElement("div", {
                   className: "footer"
                 }, React.createElement("p", undefined, AppStatic.footerText)));
 }
