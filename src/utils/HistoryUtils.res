@@ -1,4 +1,4 @@
-let deleteTransaction = (~transactionHandler, ~transactionNumber, ~transactions) => {
+let deleteTransaction = (~transaction_setter, ~transactionNumber, ~transactions) => {
     let transactionCopy: array<Transaction.structure> = Js.Array2.copy(transactions)
     Js.Array2.forEachi(transactionCopy, (x: Transaction.structure, index) => {
         if Js.Int.equal(x.id,transactionNumber) {
@@ -7,7 +7,7 @@ let deleteTransaction = (~transactionHandler, ~transactionNumber, ~transactions)
         }
     })
 
-    transactionHandler(_ => transactionCopy)
+    transaction_setter(_ => transactionCopy)
 }
 
 let editTransaction = (~editWindowToggle, ~transactionNumber, ~transactions) => {

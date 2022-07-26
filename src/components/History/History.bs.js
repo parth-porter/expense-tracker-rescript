@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import * as Belt_Array from "rescript/lib/es6/belt_Array.js";
+import * as ContextTxn from "../Context/ContextTxn.bs.js";
 import * as HistoryUtils from "../../utils/HistoryUtils.bs.js";
 import * as HistoryStatic from "../../static/HistoryStatic.bs.js";
 import * as TypeConversions from "../../utils/TypeConversions.bs.js";
@@ -10,16 +11,17 @@ import './history-component-styles.css';
 ;
 
 function $$History(Props) {
-  var allTransactions = Props.allTransactions;
-  var transactionHandler = Props.transactionHandler;
   var editTxnToggle = Props.editTxnToggle;
+  var match = React.useContext(ContextTxn.TxnContext.context);
+  var transaction_setter = match.transaction_setter;
+  var transactions = match.transactions;
   return React.createElement("div", {
               className: "history-component"
             }, React.createElement("h3", {
                   className: "history-title"
                 }, HistoryStatic.header), React.createElement("hr", undefined), React.createElement("div", {
                   className: "history-parent"
-                }, Belt_Array.map(allTransactions, (function (transaction) {
+                }, Belt_Array.map(transactions, (function (transaction) {
                         var bgColor = transaction.isPositive ? "history-item-positive" : "history-item-negative";
                         return React.createElement("div", {
                                     key: String(transaction.id),
@@ -36,7 +38,7 @@ function $$History(Props) {
                                                 className: "history-item-button",
                                                 id: String(transaction.id),
                                                 onClick: (function ($$event) {
-                                                    return HistoryUtils.deleteTransaction(transactionHandler, transaction.id, allTransactions);
+                                                    return HistoryUtils.deleteTransaction(transaction_setter, transaction.id, transactions);
                                                   })
                                               }, React.createElement("i", {
                                                     className: "fa-solid fa-trash"
@@ -44,7 +46,7 @@ function $$History(Props) {
                                                 className: "history-item-edit-button",
                                                 id: String(transaction.id),
                                                 onClick: (function ($$event) {
-                                                    return HistoryUtils.editTransaction(editTxnToggle, transaction.id, allTransactions);
+                                                    return HistoryUtils.editTransaction(editTxnToggle, transaction.id, transactions);
                                                   })
                                               }, React.createElement("i", {
                                                     className: "fa fa-edit"

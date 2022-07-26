@@ -1,8 +1,9 @@
 %%raw(`import './balance-component-styles.css';`)
 
 @react.component
-let make = (~allTransactions: array<Transaction.structure>) => {
-  let allBalances = BalanceUtils.getAllBalances(allTransactions)
+let make = () => {
+  let {transactions, _} = React.useContext(ContextTxn.TxnContext.context)
+  let allBalances = BalanceUtils.getAllBalances(transactions)
 
   <div className="balance-component">
     <div className="balance-total">
@@ -13,14 +14,12 @@ let make = (~allTransactions: array<Transaction.structure>) => {
         </h1>
       </div>
     </div>
-
     <div className="balance-combined">
       <div className="balance-combined-inner-white">
         <div className="balance-combined-income">
           <p> {BalanceStatic.subHeadingLeft} </p>
           <p className="income-amount"> {TypeConversions.float_to_RString(allBalances.income)} </p>
         </div>
-        
         <div className="balance-combined-expenses">
           <p> {BalanceStatic.subHeadingRight} </p>
           <p className="expense-amount">
